@@ -59,7 +59,6 @@ public class FileQueue {
 		try {
 			mOs = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mDataFile, true)));
 			++mSize;
-			System.out.println("enqueue: " + val);
 			mOs.write(val);
 			mOs.newLine();
 			mOs.close();
@@ -83,7 +82,6 @@ public class FileQueue {
 			mIs = new BufferedReader(new FileReader(mDataFile));
 			--mSize;
 			String val = mIs.readLine();
-			System.out.println("dequeue: " + val);
 			removeFirstLine(mDataFile);
 			return val;
 		} catch (Exception ex) {
