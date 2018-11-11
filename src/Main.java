@@ -1,4 +1,4 @@
-package com.sprogroup.filequeue;
+
 
 import java.io.*;
 import java.util.*;
@@ -97,7 +97,7 @@ public class Main {
 		long start = System.currentTimeMillis();
 		System.out.println("Start: " + start);
 		FileQueue q = new FileQueue("./data.txt");
-		for (int i = 0; i < 1000000; ++i) {
+		for (int i = 0; i < 100; ++i) {
 			q.enqueue(i + "");
 		}
 		while (!q.isEmpty()) {
