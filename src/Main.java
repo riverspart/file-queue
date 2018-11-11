@@ -13,7 +13,6 @@ public class Main {
 			System.out.println("top: " + q.top());
 			q.dequeue();
 		}
-		q.destroy();
 		System.out.println("Total: " + (System.currentTimeMillis() - start));
 	}
 }

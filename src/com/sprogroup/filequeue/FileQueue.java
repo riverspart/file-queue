@@ -46,14 +46,6 @@ public class FileQueue {
 		}
 	}
 
-	public void destroy() {
-		try {
-			mIs.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
-
 	public void enqueue(String val) {
 
 		try {
@@ -70,7 +62,9 @@ public class FileQueue {
 	public String top() {
 		try {
 			mIs = new BufferedReader(new FileReader(mDataFile));
-			return mIs.readLine();
+			String val = mIs.readLine();
+			mIs.close();
+			return val;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -83,6 +77,7 @@ public class FileQueue {
 			--mSize;
 			String val = mIs.readLine();
 			removeFirstLine(mDataFile);
+			mIs.close();
 			return val;
 		} catch (Exception ex) {
 			ex.printStackTrace();
