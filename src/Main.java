@@ -1,8 +1,10 @@
+import java.io.IOException;
+
 import com.sprogroup.filequeue.FileQueue;
 
 public class Main {
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		long start = System.currentTimeMillis();
 		System.out.println("Start: " + start);
 		FileQueue q = new FileQueue("./data.txt");
