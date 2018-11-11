@@ -36,50 +36,32 @@ public class FileQueue {
 		raf.close();
 	}
 
-	public FileQueue(String path) {
-		try {
-			mDataFile = path;
-			mFile = new File(mDataFile);
-			mFile.createNewFile();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+	public FileQueue(String path) throws IOException {
+		mDataFile = path;
+		mFile = new File(mDataFile);
+		mFile.createNewFile();
 	}
 
-	public void enqueue(String val) {
-		try {
-			mOs = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mDataFile, true)));
-			mOs.write(val);
-			mOs.newLine();
-			mOs.close();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
+	public void enqueue(String val) throws IOException {
+		mOs = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mDataFile, true)));
+		mOs.write(val);
+		mOs.newLine();
+		mOs.close();
 	}
 
-	public String top() {
-		try {
-			mIs = new BufferedReader(new FileReader(mDataFile));
-			String val = mIs.readLine();
-			mIs.close();
-			return val;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return null;
+	public String top() throws IOException {
+		mIs = new BufferedReader(new FileReader(mDataFile));
+		String val = mIs.readLine();
+		mIs.close();
+		return val;
 	}
 
-	public String dequeue() {
-		try {
-			mIs = new BufferedReader(new FileReader(mDataFile));
-			String val = mIs.readLine();
-			removeFirstLine(mDataFile);
-			mIs.close();
-			return val;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return null;
+	public String dequeue() throws IOException {
+		mIs = new BufferedReader(new FileReader(mDataFile));
+		String val = mIs.readLine();
+		removeFirstLine(mDataFile);
+		mIs.close();
+		return val;
 	}
 
 	public boolean isEmpty() {
