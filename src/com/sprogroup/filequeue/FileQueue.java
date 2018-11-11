@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 
 public class FileQueue {
-	private long mSize = 0;
+	private File mFile;
 	private String mDataFile;
 	private BufferedReader mIs;
 	private BufferedWriter mOs;
@@ -39,8 +39,8 @@ public class FileQueue {
 	public FileQueue(String path) {
 		try {
 			mDataFile = path;
-			File f = new File(mDataFile);
-			f.createNewFile();
+			mFile = new File(mDataFile);
+			mFile.createNewFile();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -50,7 +50,6 @@ public class FileQueue {
 
 		try {
 			mOs = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mDataFile, true)));
-			++mSize;
 			mOs.write(val);
 			mOs.newLine();
 			mOs.close();
@@ -74,7 +73,6 @@ public class FileQueue {
 	public String dequeue() {
 		try {
 			mIs = new BufferedReader(new FileReader(mDataFile));
-			--mSize;
 			String val = mIs.readLine();
 			removeFirstLine(mDataFile);
 			mIs.close();
@@ -86,6 +84,6 @@ public class FileQueue {
 	}
 
 	public boolean isEmpty() {
-		return mSize <= 0;
+		return !mFile.exists() || mFile.length() <= 0;
 	}
 }
