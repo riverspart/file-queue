@@ -15,7 +15,7 @@ public class FileQueue {
 	private BufferedReader mIs;
 	private BufferedWriter mOs;
 
-	public void removeFirstLine(String fileName) throws IOException {
+	private void removeFirstLine(String fileName) throws IOException {
 		RandomAccessFile raf = new RandomAccessFile(fileName, "rw");
 		// Initial write position
 		long writePosition = raf.getFilePointer();
@@ -47,7 +47,6 @@ public class FileQueue {
 	}
 
 	public void enqueue(String val) {
-
 		try {
 			mOs = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(mDataFile, true)));
 			mOs.write(val);
