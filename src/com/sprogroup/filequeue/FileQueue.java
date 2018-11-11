@@ -3,9 +3,11 @@ package com.sprogroup.filequeue;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 
@@ -50,7 +52,7 @@ public class FileQueue {
 	}
 
 	synchronized public String top() throws IOException {
-		mIs = new BufferedReader(new FileReader(mDataFile));
+		mIs = new BufferedReader(new InputStreamReader(new FileInputStream(mDataFile)));
 		String val = mIs.readLine();
 		mIs.close();
 		return val;
